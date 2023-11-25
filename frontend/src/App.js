@@ -1,10 +1,14 @@
 import React, {useEffect,useState} from 'react';
+import './App.css';
+import Header from "./header";
+import Footer from "./footer";
 
 function App() {
 
   const [backendData,setBackendData] = useState([{}])
   const [textBoxValue, setTextBoxValue] = useState('');
 
+  let searchString = '';
   let countryName = '';
   let countryCapital = '';
   let countryCurrency = '';
@@ -14,14 +18,24 @@ function App() {
   let countryFlagSrc = '';
 
   useEffect(() => {
-    fetch("/country/ireland").then(
-      response => response.json()
-    ).then(
-      data => {
-        setBackendData(data)
-      }
-    )
+    fetchData();
   }, [])
+
+  const fetchData = () => {
+
+    if(textBoxValue){
+      searchString = textBoxValue
+    }else{
+      searchString = 'ireland'
+    }
+
+    fetch(`/country/${searchString.toLowerCase()}`)
+      .then(response => response.json()
+      ).then(data => {
+          setBackendData(data)
+        }
+      )
+  }
 
   if (backendData[0] && backendData[0].name) {
     countryName = stringFormat(JSON.stringify(backendData[0].name.common));
@@ -32,8 +46,9 @@ function App() {
     countryDemonym = stringFormat(JSON.stringify(backendData[0].demonyms.eng.m));
     countryFlagSrc = JSON.stringify(backendData[0].flags.png).slice(1, -1).replace(/"/g, '')
   }
-
+  
   function stringFormat(str){
+    // Check for non-alphanumeric characters and remove them
     return str.replace(/[^a-zA-Z0-9]/g, '')
   }
 
@@ -73,6 +88,7 @@ function App() {
       COP: 'Colombian Peso',
       CRC: 'Costa Rican Colón',
       CUP: 'Cuban Peso',
+      CUC: 'Cuban Peso',
       CVE: 'Cape Verdean Escudo',
       CZK: 'Czech Republic Koruna',
       DJF: 'Djiboutian Franc',
@@ -205,7 +221,7 @@ function App() {
   }
 
   const onButtonClick = () => {
-    // console.log('button works, textbox = ', textBoxValue)
+    fetchData()
   }
 
   return(
@@ -213,20 +229,33 @@ function App() {
       {
         backendData ? (
           <div>
+            <Header />
+
             <input 
-              type='text' 
-              value={textBoxValue} 
-              onChange={(e) => setTextBoxValue(e.target.value)} 
-              placeholder='Enter Country Name' 
+              type='text'
+              value={textBoxValue}
+              onChange={(e) => setTextBoxValue(e.target.value)}
+              placeholder='Search Countries...'
             />
+
             <button onClick={onButtonClick}>Search</button>
-            <h1>{countryName}</h1>
-            <img src={countryFlagSrc} alt="national flag"/>
-            <p>Capital: {countryCapital}</p>
-            <p>Region: {countryRegion}</p>
-            <p>Currency: {countryCurrency}</p>
-            <p>Population: {countryPopulation}</p>
-            <p>Demonym: {countryDemonym}</p>
+
+            <div style={{background: '#e7e7e7', paddingBottom: '20px'}}>
+              <hr />
+
+              <h1>{countryName}</h1>
+              <img src={countryFlagSrc} alt="national flag"/>
+              <p><strong>Capital: </strong>{countryCapital}</p>
+              <p><strong>Region: </strong>{countryRegion}</p>
+              <p><strong>Currency: </strong>{countryCurrency}</p>
+              <p><strong>Population: </strong>{countryPopulation}</p>
+              <p><strong>Demonym: </strong>{countryDemonym}</p>
+
+            </div>
+
+            <div style={{color: '#e14ed2', padding: '20px'}}>
+              <Footer />
+            </div>
             
           </div>
         ) : (
