@@ -6,7 +6,7 @@ import Footer from "./footer";
 function App() {
 
   const [backendData,setBackendData] = useState([{}])
-  const [textBoxValue, setTextBoxValue] = useState('');
+  const [textBoxValue, setTextBoxValue] = useState('')
 
   let searchString = '';
   let countryName = '';
@@ -19,6 +19,7 @@ function App() {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, [])
 
   const fetchData = () => {
