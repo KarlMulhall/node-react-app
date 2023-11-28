@@ -27,7 +27,7 @@ function App() {
     if(textBoxValue){
       searchString = textBoxValue
     }else{
-      searchString = 'ireland'
+      searchString = 'welcome/index'
     }
 
     fetch(`/country/${searchString.toLowerCase()}`)
@@ -38,21 +38,54 @@ function App() {
       )
   }
 
+  // First checks if any valid data was passed at all.
+  // Then checks if the relevant data exists before formatting or
+  // displaying a 'Not Found' message.
   if (backendData[0] && backendData[0].name) {
-    countryName = stringFormat(JSON.stringify(backendData[0].name.common));
-    countryCapital = stringFormat(JSON.stringify(backendData[0].capital));
-    countryCurrency = currencyCheck(stringFormat(JSON.stringify(backendData[0].currencies)));
-    countryPopulation = stringFormat(JSON.stringify(backendData[0].population));
-    countryRegion = stringFormat(JSON.stringify(backendData[0].region));
-    countryDemonym = stringFormat(JSON.stringify(backendData[0].demonyms.eng.m));
-    countryFlagSrc = JSON.stringify(backendData[0].flags.png).slice(1, -1).replace(/"/g, '')
-  }
-  
-  function stringFormat(str){
-    // Check for non-alphanumeric characters and remove them
-    return str.replace(/[^a-zA-Z0-9]/g, '')
+    countryName = backendData[0].name.official
+      ? stringFormat(JSON.stringify(backendData[0].name.official))
+      : 'Name Not Found';
+    
+    countryCapital = backendData[0].capital 
+      ? stringFormat(JSON.stringify(backendData[0].capital)) 
+      : 'Capital Not Found';
+
+    countryCurrency = backendData[0].currencies 
+      ? currencyCheck(stringFormat(JSON.stringify(backendData[0].currencies))) 
+      : 'Currency Not Found';
+
+    countryPopulation = backendData[0].population 
+      ? stringFormat(JSON.stringify(backendData[0].population)) 
+      : 'Population Not Found';
+
+    countryRegion = backendData[0].region 
+      ? stringFormat(JSON.stringify(backendData[0].region)) 
+      : 'Region Not Found';
+
+    countryDemonym = backendData[0].demonyms.eng.m 
+      ? stringFormat(JSON.stringify(backendData[0].demonyms.eng.m)) 
+      : 'Demonym Not Found';
+
+    countryFlagSrc = backendData[0].flags.png 
+      ? JSON.stringify(backendData[0].flags.png).slice(1, -1).replace(/"/g, '') 
+      : '/error-not-found.jpg';
+
+  }else{
+    countryName = 'Oops! Please try again..'
+    countryCapital = ':('
+    countryCurrency = ':('
+    countryRegion = ':('
+    countryDemonym = ':('
+    countryPopulation = ':('
+    countryFlagSrc = "/error-not-found.png"
   }
 
+  // Check for non-alphanumeric characters and remove them excl. whitespace.
+  function stringFormat(str){
+    return str.replace(/[^\w\sÀ-ÿ]/g, '')
+  }
+
+  // Use the ISO code in the output to map with all possible currencies
   function currencyCheck(str){
     const currencyMapping = {
       USD: 'United States Dollar',
@@ -103,6 +136,7 @@ function App() {
       FJD: 'Fijian Dollar',
       FKP: 'Falkland Islands Pound',
       FOK: 'Faroe Islands Króna',
+      GBP: 'Great British Pound',
       GEL: 'Georgian Lari',
       GGP: 'Guernsey Pound',
       GHS: 'Ghanaian Cedi',
@@ -205,6 +239,7 @@ function App() {
       VES: 'Venezuelan Bolívar',
       VND: 'Vietnamese Đồng',
       VUV: 'Vanuatu Vatu',
+      WEL: '        ',
       WST: 'Samoan Tala',
       XAF: 'Central African CFA Franc',
       XCD: 'Eastern Caribbean Dollar',
@@ -218,9 +253,10 @@ function App() {
     };
 
     const code = str.substring(0,3).toUpperCase();
-    return currencyMapping[code] || 'Currency Not Found';
+    return currencyMapping[code] || ' ';
   }
 
+  // Redo the fetch request with whatever is in the search bar
   const onButtonClick = () => {
     fetchData()
   }
@@ -241,7 +277,7 @@ function App() {
 
             <button onClick={onButtonClick}>Search</button>
 
-            <div style={{background: '#e7e7e7', paddingBottom: '20px'}}>
+            <div style={{background: '#e7e7e7', paddingBottom: '20px', paddingLeft: '10px', paddingRight: '10px'}}>
               <hr />
 
               <h1>{countryName}</h1>
