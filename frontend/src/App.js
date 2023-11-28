@@ -10,6 +10,7 @@ function App() {
 
   let searchString = '';
   let countryName = '';
+  let countryOfficialName = '';
   let countryCapital = '';
   let countryCurrency = '';
   let countryPopulation = '';
@@ -42,9 +43,13 @@ function App() {
   // Then checks if the relevant data exists before formatting or
   // displaying a 'Not Found' message.
   if (backendData[0] && backendData[0].name) {
-    countryName = backendData[0].name.official
-      ? stringFormat(JSON.stringify(backendData[0].name.official))
+    countryName = backendData[0].name.common
+      ? stringFormat(JSON.stringify(backendData[0].name.common))
       : 'Name Not Found';
+
+    countryOfficialName = backendData[0].name.official
+      ? stringFormat(JSON.stringify(backendData[0].name.official))
+      : 'Official Name Not Found';
     
     countryCapital = backendData[0].capital 
       ? stringFormat(JSON.stringify(backendData[0].capital)) 
@@ -281,6 +286,7 @@ function App() {
               <hr />
 
               <h1>{countryName}</h1>
+              <h2>({countryOfficialName})</h2>
               <img src={countryFlagSrc} alt="national flag"/>
               <p><strong>Capital: </strong>{countryCapital}</p>
               <p><strong>Region: </strong>{countryRegion}</p>
