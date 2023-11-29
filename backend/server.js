@@ -24,7 +24,7 @@ app.get("/country/welcome/index", (req, res) => {
   res.json([
     {
       "name": {
-        "common": "Search for a country using the text bar above",
+        "common": " ",
         "official": "Search for a country using the text bar above"
       },
       "capital": " ",

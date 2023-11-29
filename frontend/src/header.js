@@ -1,5 +1,4 @@
 import React from "react";
-// import logo from './bounce-logo.png';
 
 function Header() {
   return (

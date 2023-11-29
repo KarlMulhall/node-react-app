@@ -77,6 +77,7 @@ function App() {
 
   }else{
     countryName = 'Oops! Please try again..'
+    countryOfficialName = '???'
     countryCapital = ':('
     countryCurrency = ':('
     countryRegion = ':('
@@ -286,7 +287,7 @@ function App() {
               <hr />
 
               <h1>{countryName}</h1>
-              <h2>({countryOfficialName})</h2>
+              <h3>{countryOfficialName}</h3>
               <img src={countryFlagSrc} alt="national flag"/>
               <p><strong>Capital: </strong>{countryCapital}</p>
               <p><strong>Region: </strong>{countryRegion}</p>
