@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component snapshot to ensure all components are loading consistently 1`] = `
+<div>
+  <div>
+    <div>
+      <div
+        data-testid="header"
+      >
+        <img
+          alt="Bounce Insights Logo"
+          src="/bounce-logo.png"
+        />
+        <div>
+          <h1>
+            REST Countries App
+          </h1>
+        </div>
+      </div>
+    </div>
+    <input
+      onChange={[Function]}
+      placeholder="Search Countries..."
+      type="text"
+      value=""
+    />
+    <button
+      onClick={[Function]}
+    >
+      Search
+    </button>
+    <div
+      style={
+        Object {
+          "background": "#e7e7e7",
+          "paddingBottom": "20px",
+          "paddingLeft": "10px",
+          "paddingRight": "10px",
+        }
+      }
+    >
+      <hr />
+      <h1>
+        Oops! Please try again..
+      </h1>
+      <h3>
+        ???
+      </h3>
+      <img
+        alt="national flag"
+        src="/error-not-found.png"
+      />
+      <p>
+        <strong>
+          Capital: 
+        </strong>
+        :(
+      </p>
+      <p>
+        <strong>
+          Region: 
+        </strong>
+        :(
+      </p>
+      <p>
+        <strong>
+          Currency: 
+        </strong>
+        :(
+      </p>
+      <p>
+        <strong>
+          Population: 
+        </strong>
+        :(
+      </p>
+      <p>
+        <strong>
+          Demonym: 
+        </strong>
+        :(
+      </p>
+    </div>
+    <div
+      style={
+        Object {
+          "color": "#e14ed2",
+          "padding": "20px",
+        }
+      }
+    >
+      <div
+        data-testid="footer"
+      >
+        <h3>
+          Created by Karl Mulhall
+        </h3>
+        <h3>
+          karlmulhall@live.ie
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+`;

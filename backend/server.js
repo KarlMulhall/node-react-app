@@ -50,4 +50,6 @@ app.get("/country/welcome/index", (req, res) => {
 
 })
 
-app.listen(5000, () => {console.log("Server started on port 5000")})
+const server = app.listen(5000, () => {console.log("Server started on port 5000")})
+
+module.exports = { app, server };

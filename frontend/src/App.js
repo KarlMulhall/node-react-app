@@ -55,6 +55,8 @@ function App() {
       ? stringFormat(JSON.stringify(backendData[0].capital)) 
       : 'Capital Not Found';
 
+    console.log(backendData[0].currencies)
+
     countryCurrency = backendData[0].currencies 
       ? currencyCheck(stringFormat(JSON.stringify(backendData[0].currencies))) 
       : 'Currency Not Found';
@@ -272,7 +274,9 @@ function App() {
       {
         backendData ? (
           <div>
-            <Header />
+            <div>
+              <Header />
+            </div>
 
             <input 
               type='text'
