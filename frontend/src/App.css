@@ -30,3 +30,8 @@ body {
     border-radius: 20px;
     cursor: pointer;
   }
+
+  .responsive-image {
+    max-width: 100%;
+    height: auto;
+  }
