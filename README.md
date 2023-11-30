@@ -20,6 +20,8 @@ node
 
 3. In one terminal window, cd into the backend folder. Once you've done this enter the following command.
 ```
+cd backend
+
 npm run dev
 ```
 This will start the backend server in development mode using Nodemon.
@@ -27,6 +29,8 @@ This will run on port 5000. If you would like to just query the backend server w
 
 4. In the other terminal window, cd into the frontend folder. Enter the following command:
 ```
+cd frontend
+
 npm start
 ```
 This will run our React application.
