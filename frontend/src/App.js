@@ -23,6 +23,8 @@ function App() {
     // eslint-disable-next-line
   }, [])
 
+  // Initializing fetchData outside of the useEffect so that it can be called on startup and be 
+  // rerun when the button is pressed
   const fetchData = () => {
 
     if(textBoxValue){
